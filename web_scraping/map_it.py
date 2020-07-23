@@ -1,3 +1,8 @@
+"""
+.. module:: web_scraping.map_it
+   :synopsis: get place name as an input or take the information of clipboard.
+"""
+
 import webbrowser
 from pandas.io.clipboard import clipboard_get
 from typing import Any
