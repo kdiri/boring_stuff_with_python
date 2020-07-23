@@ -4,8 +4,9 @@
 """
 
 import webbrowser
-from pandas.io.clipboard import clipboard_get
 from typing import Any
+
+from pandas.io.clipboard import clipboard_get
 
 
 def get_content():
