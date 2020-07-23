@@ -10,6 +10,7 @@ def get_existing_page():
     page = requests.get("https://automatetheboringstuff.com/files/rj.txt")
     assert page.status_code == requests.codes.ok
     logger.info(page.text[:250])
+    return page
 
 
 def get_404():
@@ -25,7 +26,15 @@ def get_safe_404():
         logger.error(f"Error occurred: {e}")
 
 
+def save_page():
+    page = get_existing_page()
+    page.raise_for_status()
+    play_file = open("web_scraping/RomeoAndJuliet.txt", "wb")
+    for chunk in page.iter_content(100_000):
+        play_file.write(chunk)
+    play_file.close()
+
+
 if __name__ == "__main__":
-    get_existing_page()
+    save_page()
     get_safe_404()
-    get_404()
