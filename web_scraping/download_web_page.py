@@ -32,10 +32,11 @@ def get_safe_404():
 
 
 def save_page():
+    iter_cont = 100_000
     page = get_existing_page()
     page.raise_for_status()
     play_file = open("web_scraping/RomeoAndJuliet.txt", "wb")
-    for chunk in page.iter_content(100_000):
+    for chunk in page.iter_content(iter_cont):
         play_file.write(chunk)
     play_file.close()
 
