@@ -3,6 +3,7 @@
    :synopsis: download web pages using requests module
 """
 import sys
+from typing import Any
 
 import requests
 from loguru import logger
@@ -10,10 +11,13 @@ from loguru import logger
 logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>")
 
 
-def get_existing_page():
-    page = requests.get("https://automatetheboringstuff.com/files/rj.txt")
-    assert page.status_code == requests.codes.ok
-    logger.success(page.text[:250])
+def get_existing_page(address: str = "") -> Any:
+    if not address:
+        page = requests.get("https://automatetheboringstuff.com/files/rj.txt")
+    else:
+        page = requests.get(address)
+
+    page.raise_for_status()
     return page
 
 
