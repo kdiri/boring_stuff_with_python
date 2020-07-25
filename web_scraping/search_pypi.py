@@ -10,6 +10,7 @@ from loguru import logger
 from typing import List
 from bs4 import BeautifulSoup
 import requests
+import re
 
 
 def construct_base_query():
@@ -17,10 +18,10 @@ def construct_base_query():
 
 
 def construct_search_query(to_look_for) -> List:
-    search_queries = [
-        f"https://google.co.uk/search?q={to_look_for}",
-        f"https://pypi.org/search/?q={to_look_for}",
-    ]
+    search_queries = {
+        "google": f"https://google.co.uk/search?q={to_look_for}",
+        "pypi": f"https://pypi.org/search/?q={to_look_for}",
+    }
     return search_queries
 
 
@@ -28,37 +29,33 @@ def get_input_from_command_line_or_clipboard():
     return get_content()
 
 
-def make_it_soup(res):
-    results = BeautifulSoup(res.text, "lxml")
-    for result in results.select(".r a"):
-        logger.info(result.next)
+def make_it_soup(res: requests):
+    return BeautifulSoup(res.content, "html.parser")
+
+
+def parse_results(resp: requests):
+    results: list = []
+    soup = make_it_soup(resp)
+    for g in soup.find_all("div", class_="r"):
+        anchors = g.find_all("a")
+        if anchors:
+            link = anchors[0]["href"]
+            title = g.find("h3").text
+            item = {"title": title, "link": link}
+            results.append(item)
     return results
-
-
-def parse_results(results: requests):
-    base = construct_base_query()
-    results = make_it_soup(results)
-
-    for next_page in results.select(".fl"):
-        res = get_existing_page(base + next_page.get("href"))
-        soup = make_it_soup(res)
-
-    return soup
 
 
 def orchestrate():
     libraries = get_input_from_command_line_or_clipboard()
     search_queries = construct_search_query(libraries)
-    for search_query in search_queries:
-        i = 0
-        logger.info(search_query)
-        results = get_existing_page(search_query)
-        for result in results:
-            logger.info(result)
-            webbrowser.open(result)
-            i += 1
-            if i == 3:
-                break
+    results = get_existing_page(search_queries.get("google", None))
+    pages_to_open = parse_results(results)
+    for i, page_to_open in enumerate(pages_to_open):
+        webbrowser.open(page_to_open.get("link"))
+        i += 1
+        if i == 3:
+            break
 
 
 if __name__ == "__main__":

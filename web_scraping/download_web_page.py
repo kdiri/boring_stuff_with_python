@@ -8,14 +8,20 @@ from typing import Any
 import requests
 from loguru import logger
 
-logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>")
+logger.add(
+    sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>"
+)
 
 
 def get_existing_page(address: str = "") -> Any:
+    user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:65.0) Gecko/20100101 Firefox/65.0"
+    headers = {"user-agent": user_agent}
     if not address:
-        page = requests.get("https://automatetheboringstuff.com/files/rj.txt")
+        page = requests.get(
+            "https://automatetheboringstuff.com/files/rj.txt", headers=headers
+        )
     else:
-        page = requests.get(address)
+        page = requests.get(address, headers=headers)
 
     page.raise_for_status()
     return page
