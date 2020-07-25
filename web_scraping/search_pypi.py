@@ -3,14 +3,13 @@
    :synopsis: search libs on pypi.org and show the results on a different tabs
 """
 import webbrowser
+from typing import List
+
+import requests
+from bs4 import BeautifulSoup
 
 from web_scraping.download_web_page import get_existing_page
 from web_scraping.map_it import get_content
-from loguru import logger
-from typing import List
-from bs4 import BeautifulSoup
-import requests
-import re
 
 
 def construct_base_query():
