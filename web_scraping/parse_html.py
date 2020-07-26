@@ -8,7 +8,7 @@ from loguru import logger
 
 
 def parse():
-    res = open("web_scraping/another_example.html")
+    res = open("web_scraping/html_files/another_example.html")
     no_starch_soup = bs4.BeautifulSoup(res.read(), "html.parser")
     logger.success(no_starch_soup)
     author = no_starch_soup.select("#author")
