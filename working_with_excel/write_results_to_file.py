@@ -16,6 +16,7 @@ def load_census_file():
 def compute_population_of_each_country(sheet: load_workbook):
     new_dict: dict = {}
     for state, county, pop in zip(sheet["B"], sheet["C"], sheet["D"]):
+        county.value = str(county.value).replace("'", "")
         pop = int(pop.value) if str(pop.value).isdigit() else 0
         if state.value in new_dict:
             if county.value in new_dict[state.value]:
@@ -30,7 +31,7 @@ def compute_population_of_each_country(sheet: load_workbook):
 def write_results_to_file(result_dict: Dict):
     logger.info(f"| ----- Results will be written into file.")
     with open("census2010.py", "w") as res_file:
-        res_file.write(f"'Results': {pprint.pformat(result_dict)}")
+        res_file.write(f"'Results' = {pprint.pformat(result_dict)}")
     logger.success(f"| ----- Results are in the census2010.py file.")
 
 
