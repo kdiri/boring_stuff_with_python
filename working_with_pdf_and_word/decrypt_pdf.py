@@ -24,7 +24,7 @@ def _decrypt(pdf_reader: PdfFileReader, passwd: str):
 
 
 def read_pdf():
-    with open("pdf_files/encrypted.pdf", "rb") as enc_file:
+    with open("pdf_word_files/encrypted.pdf", "rb") as enc_file:
         pdf_reader = PdfFileReader(enc_file)
         if _is_encrypted(pdf_reader):
             passwd = _get_passwd()
