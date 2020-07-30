@@ -14,6 +14,5 @@ def restyle_doc():
     doc.save("pdf_word_files/restyled.docx")
 
 
-
 if __name__ == "__main__":
     restyle_doc()
