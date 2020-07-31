@@ -3,6 +3,7 @@
    :synopsis: Read, write csv files
 """
 import csv
+
 from loguru import logger
 
 example_file_path = "csv_files/example.csv"

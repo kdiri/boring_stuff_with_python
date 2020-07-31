@@ -3,10 +3,11 @@
    :synopsis: Get the information from excel file and write computing results to another file.
 """
 
-from openpyxl import load_workbook
 import pprint
-from loguru import logger
 from typing import Dict
+
+from loguru import logger
+from openpyxl import load_workbook
 
 
 def load_census_file():
