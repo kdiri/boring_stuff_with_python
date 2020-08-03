@@ -1,7 +1,6 @@
 """
-.. module:: sending_email_and_text_messages.seend_email
+.. module:: sending_email_and_text_messages.send_email
    :synopsis: send email using a gmail account
-
 """
 import smtplib
 

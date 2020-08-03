@@ -23,6 +23,7 @@ google-api-python-client = "^1.10.0"
 google-auth-httplib2 = "^0.0.4"
 ansicolortags = "^0.4"
 twilio = "^6.44.1"
+Pillow = "^7.2.0"
 
 [tool.poetry.dev-dependencies]
 
