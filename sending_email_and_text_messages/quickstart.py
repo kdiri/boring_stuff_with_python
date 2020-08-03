@@ -1,3 +1,10 @@
+"""
+.. module:: quickstart with google API
+   :synopsis:
+
+https://developers.google.com/gmail/api/quickstart/python
+"""
+
 from __future__ import print_function
 import pickle
 import os.path
