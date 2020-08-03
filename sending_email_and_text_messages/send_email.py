@@ -1,5 +1,5 @@
 """
-.. module:: sending_email_and_text_messages
+.. module:: sending_email_and_text_messages.seend_email
    :synopsis: send email using a gmail account
 
 """
