@@ -24,6 +24,7 @@ google-auth-httplib2 = "^0.0.4"
 ansicolortags = "^0.4"
 twilio = "^6.44.1"
 Pillow = "^7.2.0"
+pyautogui = "^0.9.50"
 
 [tool.poetry.dev-dependencies]
 
